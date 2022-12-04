@@ -49,58 +49,60 @@ import {
 import {
   chartExample3,
 } from "variables/charts.js";
+
+
 function Dashboard(props) {
-  const [bigChartData, setbigChartData] = React.useState("data1");
+  const [startDate, setStartDate] = useState("2022-11-01");
+  const [endDate, setEndDate] = useState("2022-11-10");
+
+  const [bigChartData, setbigChartData] = useState("data1");
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
-  var list=[]
-  for (var i=28;i<32;i++)
-{ 
-  list.push('10月'+i+'号')
-}
-for (var i=1;i<31;i++)
-{ 
-  list.push('11月'+i+'号')
-}
-var datagex2
-datagex2=[
-  "205",
-  "120",
-"84",
-"178",
-"134",
-"105",
-"98",
-"88",
-"45",
-"41",
-"74",
-"62",
-"67",
-"74",
-"446",
-"95",
-"69",
-"140",
-"107",
-"395",
-"395",
-"207",
-"118",
-"93",
-"125",
-"136",
-"113",
-"163",
-"109",
-"144",
-"93",
-"105",
-"83",
-"137"
-]
-  var datagex=[]
+  var list = []
+  for (var i = 28; i < 32; i++) {
+    list.push('10月' + i + '号')
+  }
+  for (var i = 1; i < 31; i++) {
+    list.push('11月' + i + '号')
+  }
+  var datagex2 = [
+    "205",
+    "120",
+    "84",
+    "178",
+    "134",
+    "105",
+    "98",
+    "88",
+    "45",
+    "41",
+    "74",
+    "62",
+    "67",
+    "74",
+    "446",
+    "95",
+    "69",
+    "140",
+    "107",
+    "395",
+    "395",
+    "207",
+    "118",
+    "93",
+    "125",
+    "136",
+    "113",
+    "163",
+    "109",
+    "144",
+    "93",
+    "105",
+    "83",
+    "137"
+  ]
+  var datagex = []
   let chart1_2_options = {
     maintainAspectRatio: false,
     legend: {
@@ -154,13 +156,13 @@ datagex2=[
   let chartExample1 = {
     data1: (canvas) => {
       let ctx = canvas.getContext("2d");
-  
+
       let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-  
+
       gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
       gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
       gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
-  
+
       return {
         labels: list,
         datasets: [
@@ -215,13 +217,13 @@ datagex2=[
     },
     data2: (canvas) => {
       let ctx = canvas.getContext("2d");
-  
+
       let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-  
+
       gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
       gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
       gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
-  
+
       return {
         labels: list,
         datasets: [
@@ -247,13 +249,13 @@ datagex2=[
     },
     data3: (canvas) => {
       let ctx = canvas.getContext("2d");
-  
+
       let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-  
+
       gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
       gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
       gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
-  
+
       return {
         labels: [
           "JAN",
@@ -292,34 +294,35 @@ datagex2=[
     },
     options: chart1_2_options
   };
-  function datasum(a,b){
-    var year=a.slice(0,4);
-    var month=a.slice(5,7);
-    var day=a.slice(8,10);
-    var year2=b.slice(0,4);
-    var month2=b.slice(5,7);
-    var day2=b.slice(8,10);
-    day=parseInt(day)
-    day2=parseInt(day2)
+  function dataSum(a, b) {
+    var year = a.slice(0, 4);
+    var month = a.slice(5, 7);
+    var day = a.slice(8, 10);
+    var year2 = b.slice(0, 4);
+    var month2 = b.slice(5, 7);
+    var day2 = b.slice(8, 10);
+    day = parseInt(day)
+    day2 = parseInt(day2)
     // console.log(year+" "+month+" "+day);
-    for (var i=day;i<day2;i++){console.log(i);
-    var day1= i.toString()
-    console.log(day1)
-    const fetchData = async () => {
-      const result = await axios.get(
-        'https://maas.aminer.cn/tracking/statistics/selectDataIndicators?startTime=2022-11-0'+day1+'&endTime=2022-11-0'+day1,
-      );
-      return (datagex.push(result.data.data["dayInstallNumber"]),
-            console.log ('fetch data result:' , datagex))
-    };
-    fetchData(); 
+    for (let i = day; i < day2; i++) {
+      console.log(i);
+      let day1 = i.toString()
+      console.log(day1)
+      const fetchData = async () => {
+        const result = await axios.get(
+          'https://maas.aminer.cn/tracking/statistics/selectDataIndicators?startTime=2022-11-0' + day1 + '&endTime=2022-11-0' + day1,
+        );
+        return (datagex.push(result.data.data["dayInstallNumber"]),
+          console.log('fetch data result:', datagex))
+      };
+      fetchData();
+    }
   }
-   }
   useEffect(() => {
-      datasum("2022-11-01","2022-11-10")
+    dataSum(startDate, endDate);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  let dataset={}
-  dataset={datagex:datagex}
+
   return (
     <>
       <div className="content">
@@ -332,8 +335,8 @@ datagex2=[
                   <Col className="text-left" sm="6">
                     <h5 className="card-category">CodeGeeX下载总量</h5>
                     <CardTitle tag="h2">4648</CardTitle>
-                    </Col>
-                    <Col className="text-right" sm="6">
+                  </Col>
+                  <Col className="text-right" sm="6">
                     <Form className="text-right" inline>
                       <FormGroup>
                         <Label for="exampleEmail">start date</Label>
@@ -341,6 +344,7 @@ datagex2=[
                           type="date"
                           name="start date"
                           placeholder="2022/10/01"
+                          onChange={(e) => { setStartDate(e.target.value) }}
                         />
                       </FormGroup>
                       <FormGroup>
@@ -349,10 +353,17 @@ datagex2=[
                           type="date"
                           name="end date"
                           placeholder="2022/10/02"
+                          onChange={(e) => { setEndDate(e.target.value) }}
                         />
                       </FormGroup>
-                    <Button >查询</Button>
-                  </Form>
+                      <Button onClick={(e) => {
+                        console.log('button click: ', startDate, ' ', endDate)
+                        if (startDate && endDate) {
+                          console.log('button click: ', startDate, ' ', endDate)
+                          dataSum(startDate, endDate)
+                        }
+                      }}>查询</Button>
+                    </Form>
                   </Col>
                 </Row>
               </CardHeader>
@@ -384,7 +395,6 @@ datagex2=[
               <CardBody>
                 <div className="chart-area">
                   <Line
-              
                     data={chartExample1["data2"]}
                     options={chartExample1.options}
                   />
@@ -394,7 +404,7 @@ datagex2=[
           </Col>
         </Row>
         <Row>
-        <Col lg="4">
+          <Col lg="4">
             <Card className="card-chart">
               <CardHeader>
                 <h5 className="card-category">Daily Sales</h5>
