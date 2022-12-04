@@ -20,7 +20,7 @@
 // #############################
 
 // chartExample1 and chartExample2 options
-
+// var jsonData = require('./data.json');
 let chart1_2_options = {
   maintainAspectRatio: false,
   legend: {
@@ -79,6 +79,7 @@ for (var i=1;i<31;i++)
 { 
   list.push('11月'+i+'号')
 }
+// var testdata=[...jsonData]
 var datagex=["16096",
   "20119",
   "27965",
@@ -188,6 +189,35 @@ let chartExample1 = {
           pointHoverBorderWidth: 15,
           pointRadius: 4,
           data: datagex2
+        },
+        {
+          label: "总调用量",
+          fill: true,
+          backgroundColor: gradientStroke,
+          borderColor: "#1f8ef1",
+          borderWidth: 2,
+          borderDash: [],
+          borderDashOffset: 0.0,
+          pointBackgroundColor: "#1f8ef1",
+          pointBorderColor: "rgba(255,255,255,0)",
+          pointHoverBackgroundColor: "#1f8ef1",
+          pointBorderWidth: 20,
+          pointHoverRadius: 4,
+          pointHoverBorderWidth: 15,
+          pointRadius: 4,
+          data: datagex
+        },
+        {
+          label: "Countries",
+          fill: true,
+          type: 'bar',
+          backgroundColor: gradientStroke,
+          hoverBackgroundColor: gradientStroke,
+          borderColor: "#d048b6",
+          borderWidth: 2,
+          borderDash: [],
+          borderDashOffset: 0.0,
+          data: datagex
         }
       ]
     };

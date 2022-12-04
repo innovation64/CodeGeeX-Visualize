@@ -1,0 +1,298 @@
+[
+    {
+      "_id": "637220f9cc3fb02007ea1f38",
+      "date_time": "2022-10-27",
+      "day_install_number": "0",
+      "day_invoke_number": "0",
+      "morrow_retention": "0.0000%",
+      "user_dau": "0"
+    },
+    {
+      "_id": "637220facc3fb02007ea1f39",
+      "date_time": "2022-10-28",
+      "day_install_number": "205",
+      "day_invoke_number": "16096",
+      "morrow_retention": "0.0000%",
+      "user_dau": "205"
+    },
+    {
+      "_id": "637220fbcc3fb02007ea1f3a",
+      "date_time": "2022-10-29",
+      "day_install_number": "120",
+      "day_invoke_number": "20119",
+      "morrow_retention": "38.5366%",
+      "user_dau": "199"
+    },
+    {
+      "_id": "637220fccc3fb02007ea1f3b",
+      "date_time": "2022-10-30",
+      "day_install_number": "84",
+      "day_invoke_number": "27965",
+      "morrow_retention": "47.2362%",
+      "user_dau": "197"
+    },
+    {
+      "_id": "637220fdcc3fb02007ea1f3c",
+      "date_time": "2022-10-31",
+      "day_install_number": "178",
+      "day_invoke_number": "64065",
+      "morrow_retention": "67.0051%",
+      "user_dau": "422"
+    },
+    {
+      "_id": "637220fecc3fb02007ea1f3d",
+      "date_time": "2022-11-01",
+      "day_install_number": "134",
+      "day_invoke_number": "72140",
+      "morrow_retention": "65.6398%",
+      "user_dau": "451"
+    },
+    {
+      "_id": "63722100cc3fb02007ea1f3e",
+      "date_time": "2022-11-02",
+      "day_install_number": "105",
+      "day_invoke_number": "78247",
+      "morrow_retention": "64.7450%",
+      "user_dau": "465"
+    },
+    {
+      "_id": "63722101cc3fb02007ea1f3f",
+      "date_time": "2022-11-03",
+      "day_install_number": "98",
+      "day_invoke_number": "83057",
+      "morrow_retention": "67.0968%",
+      "user_dau": "499"
+    },
+    {
+      "_id": "63722103cc3fb02007ea1f40",
+      "date_time": "2022-11-04",
+      "day_install_number": "88",
+      "day_invoke_number": "63194",
+      "morrow_retention": "62.5251%",
+      "user_dau": "493"
+    },
+    {
+      "_id": "63722104cc3fb02007ea1f41",
+      "date_time": "2022-11-05",
+      "day_install_number": "45",
+      "day_invoke_number": "26685",
+      "morrow_retention": "28.8032%",
+      "user_dau": "250"
+    },
+    {
+      "_id": "63722105cc3fb02007ea1f42",
+      "date_time": "2022-11-06",
+      "day_install_number": "41",
+      "day_invoke_number": "18213",
+      "morrow_retention": "46.4000%",
+      "user_dau": "235"
+    },
+    {
+      "_id": "63722106cc3fb02007ea1f43",
+      "date_time": "2022-11-07",
+      "day_install_number": "74",
+      "day_invoke_number": "50202",
+      "morrow_retention": "66.8085%",
+      "user_dau": "551"
+    },
+    {
+      "_id": "63722107cc3fb02007ea1f44",
+      "date_time": "2022-11-08",
+      "day_install_number": "62",
+      "day_invoke_number": "48791",
+      "morrow_retention": "65.6987%",
+      "user_dau": "539"
+    },
+    {
+      "_id": "63722109cc3fb02007ea1f45",
+      "date_time": "2022-11-09",
+      "day_install_number": "67",
+      "day_invoke_number": "45062",
+      "morrow_retention": "63.4508%",
+      "user_dau": "530"
+    },
+    {
+      "_id": "6372210acc3fb02007ea1f46",
+      "date_time": "2022-11-10",
+      "day_install_number": "74",
+      "day_invoke_number": "43104",
+      "morrow_retention": "62.2641%",
+      "user_dau": "549"
+    },
+    {
+      "_id": "6372210ccc3fb02007ea1f47",
+      "date_time": "2022-11-11",
+      "day_install_number": "446",
+      "day_invoke_number": "56714",
+      "morrow_retention": "58.4699%",
+      "user_dau": "922"
+    },
+    {
+      "_id": "6372210dcc3fb02007ea1f48",
+      "date_time": "2022-11-12",
+      "day_install_number": "95",
+      "day_invoke_number": "26336",
+      "morrow_retention": "24.1866%",
+      "user_dau": "403"
+    },
+    {
+      "_id": "6372210fcc3fb02007ea1f49",
+      "date_time": "2022-11-13",
+      "day_install_number": "69",
+      "day_invoke_number": "28687",
+      "morrow_retention": "42.4318%",
+      "user_dau": "347"
+    },
+    {
+      "_id": "637263a925786f2c483a3555",
+      "date_time": "2022-11-14",
+      "day_install_number": "140",
+      "day_invoke_number": "58519",
+      "morrow_retention": "57.0605%",
+      "user_dau": "866"
+    },
+    {
+      "_id": "6373b52925786f2c483a856a",
+      "date_time": "2022-11-15",
+      "day_install_number": "107",
+      "day_invoke_number": "57990",
+      "morrow_retention": "62.0092%",
+      "user_dau": "831"
+    },
+    {
+      "_id": "637506aa25786f2c483af56f",
+      "date_time": "2022-11-16",
+      "day_install_number": "395",
+      "day_invoke_number": "81429",
+      "morrow_retention": "60.8173%",
+      "user_dau": "1113"
+    },
+    {
+      "_id": "6376582925786f2c483b7012",
+      "date_time": "2022-11-17",
+      "day_install_number": "395",
+      "day_invoke_number": "88929",
+      "morrow_retention": "58.0413%",
+      "user_dau": "1255"
+    },
+    {
+      "_id": "6377a9a925786f2c483bde4b",
+      "date_time": "2022-11-18",
+      "day_install_number": "207",
+      "day_invoke_number": "79468",
+      "morrow_retention": "56.8362%",
+      "user_dau": "1162"
+    },
+    {
+      "_id": "6378fb2a25786f2c483c1b6b",
+      "date_time": "2022-11-19",
+      "day_install_number": "118",
+      "day_invoke_number": "44430",
+      "morrow_retention": "30.2666%",
+      "user_dau": "639"
+    },
+    {
+      "_id": "637a4caa25786f2c483c52f1",
+      "date_time": "2022-11-20",
+      "day_install_number": "93",
+      "day_invoke_number": "40545",
+      "morrow_retention": "41.5888%",
+      "user_dau": "544"
+    },
+    {
+      "_id": "637b9e2a25786f2c483cbcff",
+      "date_time": "2022-11-21",
+      "day_install_number": "125",
+      "day_invoke_number": "76315",
+      "morrow_retention": "55.2294%",
+      "user_dau": "1142"
+    },
+    {
+      "_id": "637cefaa25786f2c483d1d17",
+      "date_time": "2022-11-22",
+      "day_install_number": "136",
+      "day_invoke_number": "69182",
+      "morrow_retention": "60.6272%",
+      "user_dau": "1114"
+    },
+    {
+      "_id": "637e412a8e545200082a5759",
+      "date_time": "2022-11-23",
+      "day_install_number": "113",
+      "day_invoke_number": "76654",
+      "morrow_retention": "61.2355%",
+      "user_dau": "1101"
+    },
+    {
+      "_id": "637f92aaf83bdb0008af09a4",
+      "date_time": "2022-11-24",
+      "day_install_number": "163",
+      "day_invoke_number": "76302",
+      "morrow_retention": "61.8875%",
+      "user_dau": "1153"
+    },
+    {
+      "_id": "6380e441f83bdb0008af6698",
+      "date_time": "2022-11-25",
+      "day_install_number": "109",
+      "day_invoke_number": "66666",
+      "morrow_retention": "58.9610%",
+      "user_dau": "1050"
+    },
+    {
+      "_id": "638235acf83bdb0008afa6ef",
+      "date_time": "2022-11-26",
+      "day_install_number": "144",
+      "day_invoke_number": "46692",
+      "morrow_retention": "32.9524%",
+      "user_dau": "683"
+    },
+    {
+      "_id": "6383872df83bdb0008afe40f",
+      "date_time": "2022-11-27",
+      "day_install_number": "93",
+      "day_invoke_number": "44419",
+      "morrow_retention": "44.3149%",
+      "user_dau": "622"
+    },
+    {
+      "_id": "6384d8adf83bdb0008b0506f",
+      "date_time": "2022-11-28",
+      "day_install_number": "105",
+      "day_invoke_number": "78073",
+      "morrow_retention": "51.6854%",
+      "user_dau": "1161"
+    },
+    {
+      "_id": "63862a2ff83bdb0008b103ca",
+      "date_time": "2022-11-29",
+      "day_install_number": "83",
+      "day_invoke_number": "132724",
+      "morrow_retention": "61.7496%",
+      "user_dau": "1137"
+    },
+    {
+      "_id": "63877bb2f83bdb0008b1e7dd",
+      "date_time": "2022-11-30",
+      "day_install_number": "137",
+      "day_invoke_number": "169507",
+      "morrow_retention": "60.6486%",
+      "user_dau": "1174"
+    },
+    {
+      "_id": "6388cd36f83bdb0008b2d9ee",
+      "date_time": "2022-12-01",
+      "day_install_number": "156",
+      "day_invoke_number": "179943",
+      "morrow_retention": "61.4274%",
+      "user_dau": "1211"
+    },
+    {
+      "_id": "638a1eb2f83bdb0008b3c6df",
+      "date_time": "2022-12-02",
+      "day_install_number": "149",
+      "day_invoke_number": "177281",
+      "morrow_retention": "58.2164%",
+      "user_dau": "1178"
+    }
+  ]
