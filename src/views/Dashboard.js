@@ -15,92 +15,38 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect} from 'react';
 // nodejs library that concatenates classes
-import classNames from "classnames";
 // react plugin used to create charts
-import { Line, Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 
-import Example from "variables/data";
 // reactstrap components
 import {
-  Button,
-  ButtonGroup,
   Card,
   CardHeader,
   CardBody,
   CardTitle,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
   Label,
   Form,
   FormGroup,
   Input,
-  Table,
   Row,
   Col,
-  UncontrolledTooltip
 } from "reactstrap";
 
 // core components
 import {
-  chartExample3,
+  chartExample4
 } from "variables/charts.js";
+import { data } from 'jquery';
 function Dashboard(props) {
-  const [bigChartData, setbigChartData] = React.useState("data1");
-  const setBgChartData = (name) => {
-    setbigChartData(name);
-  };
-  var list=[]
-  for (var i=28;i<32;i++)
-{ 
-  list.push('10月'+i+'号')
-}
-for (var i=1;i<31;i++)
-{ 
-  list.push('11月'+i+'号')
-}
-var datagex2
-datagex2=[
-  "205",
-  "120",
-"84",
-"178",
-"134",
-"105",
-"98",
-"88",
-"45",
-"41",
-"74",
-"62",
-"67",
-"74",
-"446",
-"95",
-"69",
-"140",
-"107",
-"395",
-"395",
-"207",
-"118",
-"93",
-"125",
-"136",
-"113",
-"163",
-"109",
-"144",
-"93",
-"105",
-"83",
-"137"
-]
-  var datagex=[]
+  const [startDate, setStartDate] = useState("2022-12-01");
+  const [endDate, setEndDate] = useState("2022-12-5");
+  let list=[]
+  let datagex2=[]
+  let datagex3=[]
+  let datagex=[]
+  let datagex4=[]
   let chart1_2_options = {
     maintainAspectRatio: false,
     legend: {
@@ -161,11 +107,28 @@ datagex2=[
       gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
       gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
   
-      return {
+      return  {
         labels: list,
         datasets: [
           {
-            label: "总下载量",
+            label: "累计下载量",
+            fill: true,
+            backgroundColor: gradientStroke,
+            borderColor: "#1f8ef1",
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
+            pointBackgroundColor: "#1f8ef1",
+            pointBorderColor: "rgba(255,255,255,0)",
+            pointHoverBackgroundColor: "#1f8ef1",
+            pointBorderWidth: 20,
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 15,
+            pointRadius: 4,
+            data: datagex
+          },
+          {
+            label: "日新增安装量",
             fill: true,
             backgroundColor: gradientStroke,
             borderColor: "#1f8ef1",
@@ -182,7 +145,7 @@ datagex2=[
             data: datagex2
           },
           {
-            label: "总调用量",
+            label: "日活跃度",
             fill: true,
             backgroundColor: gradientStroke,
             borderColor: "#1f8ef1",
@@ -196,19 +159,24 @@ datagex2=[
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
             pointRadius: 4,
-            data: datagex
+            data: datagex3
           },
           {
-            label: "Countries",
+            label: "日调用",
             fill: true,
-            type: 'bar',
             backgroundColor: gradientStroke,
-            hoverBackgroundColor: gradientStroke,
-            borderColor: "#d048b6",
+            borderColor: "#1f8ef1",
             borderWidth: 2,
             borderDash: [],
             borderDashOffset: 0.0,
-            data: datagex
+            pointBackgroundColor: "#1f8ef1",
+            pointBorderColor: "rgba(255,255,255,0)",
+            pointHoverBackgroundColor: "#1f8ef1",
+            pointBorderWidth: 20,
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 15,
+            pointRadius: 4,
+            data: datagex4
           }
         ]
       };
@@ -226,7 +194,7 @@ datagex2=[
         labels: list,
         datasets: [
           {
-            label: "总调用量",
+            label: "累计下载量",
             fill: true,
             backgroundColor: gradientStroke,
             borderColor: "#1f8ef1",
@@ -240,6 +208,18 @@ datagex2=[
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
             pointRadius: 4,
+            data: datagex
+          },
+          {
+            label: "累计下载量",
+            fill: true,
+            type: 'bar',
+            backgroundColor: gradientStroke,
+            hoverBackgroundColor: gradientStroke,
+            borderColor: "#d048b6",
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
             data: datagex
           }
         ]
@@ -255,23 +235,10 @@ datagex2=[
       gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
   
       return {
-        labels: [
-          "JAN",
-          "FEB",
-          "MAR",
-          "APR",
-          "MAY",
-          "JUN",
-          "JUL",
-          "AUG",
-          "SEP",
-          "OCT",
-          "NOV",
-          "DEC"
-        ],
+        labels: list,
         datasets: [
           {
-            label: "My First dataset",
+            label: "日新增安装量",
             fill: true,
             backgroundColor: gradientStroke,
             borderColor: "#1f8ef1",
@@ -285,41 +252,220 @@ datagex2=[
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
             pointRadius: 4,
-            data: [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130]
+            data: datagex2
+          },
+          {
+            label: "日新增安装量",
+            fill: true,
+            type: 'bar',
+            backgroundColor: gradientStroke,
+            hoverBackgroundColor: gradientStroke,
+            borderColor: "#d048b6",
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
+            data: datagex2
+          }
+        ]
+      };
+    },
+    data4: (canvas) => {
+      let ctx = canvas.getContext("2d");
+  
+      let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+  
+      gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
+      gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
+      gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
+  
+      return {
+        labels: list,
+        datasets: [
+          {
+            label: "日活跃度",
+            fill: true,
+            backgroundColor: gradientStroke,
+            borderColor: "#1f8ef1",
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
+            pointBackgroundColor: "#1f8ef1",
+            pointBorderColor: "rgba(255,255,255,0)",
+            pointHoverBackgroundColor: "#1f8ef1",
+            pointBorderWidth: 20,
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 15,
+            pointRadius: 4,
+            data: datagex3
+          },
+          {
+            label: "日活跃度",
+            fill: true,
+            type: 'bar',
+            backgroundColor: gradientStroke,
+            hoverBackgroundColor: gradientStroke,
+            borderColor: "#d048b6",
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
+            data: datagex3
+          }
+        ]
+      };
+    },
+    data5: (canvas) => {
+      let ctx = canvas.getContext("2d");
+  
+      let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+  
+      gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
+      gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
+      gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
+  
+      return {
+        labels: list,
+        datasets: [
+          {
+            label: "日调用",
+            fill: true,
+            backgroundColor: gradientStroke,
+            borderColor: "#1f8ef1",
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
+            pointBackgroundColor: "#1f8ef1",
+            pointBorderColor: "rgba(255,255,255,0)",
+            pointHoverBackgroundColor: "#1f8ef1",
+            pointBorderWidth: 20,
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 15,
+            pointRadius: 4,
+            data: datagex4
+          },
+          {
+            label: "日调用",
+            fill: true,
+            type: 'bar',
+            backgroundColor: gradientStroke,
+            hoverBackgroundColor: gradientStroke,
+            borderColor: "#d048b6",
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
+            data: datagex4
           }
         ]
       };
     },
     options: chart1_2_options
   };
-  function datasum(a,b){
-    var year=a.slice(0,4);
-    var month=a.slice(5,7);
-    var day=a.slice(8,10);
-    var year2=b.slice(0,4);
-    var month2=b.slice(5,7);
-    var day2=b.slice(8,10);
-    day=parseInt(day)
-    day2=parseInt(day2)
-    // console.log(year+" "+month+" "+day);
-    for (var i=day;i<day2;i++){console.log(i);
-    var day1= i.toString()
-    console.log(day1)
-    const fetchData = async () => {
-      const result = await axios.get(
-        'https://maas.aminer.cn/tracking/statistics/selectDataIndicators?startTime=2022-11-0'+day1+'&endTime=2022-11-0'+day1,
-      );
-      return (datagex.push(result.data.data["dayInstallNumber"]),
-            console.log ('fetch data result:' , datagex))
-    };
-    fetchData(); 
-  }
+  function dataSum(a,b){
+    list=[]
+    datagex=[]
+    datagex2=[]
+    datagex3=[]
+    datagex4=[]
+
+    let request = new XMLHttpRequest();
+    request.open('GET', "http://10.50.74.216:32621/tracking/visualData/selectDaily?startTime="+a+"&endTime="+b, false);  // 同步请求
+    request.send(null);
+
+    let obj={}
+    if (request.status === 200) {
+       obj = JSON.parse(request.responseText);
+      console.log(obj) 
+      // console.log(request.responseText);
+    }
+
+      console.log(Object.keys(obj.data).length) 
+
+    // };
+
+    // fetchData();
+         for(var i=0;i<Object.keys(obj.data).length;i++)
+      {
+        list.push(obj.data[i]["dateTime"])
+        datagex.push(obj.data[i]["installsNumber"])
+        datagex2.push(obj.data[i]["addInstallsNumber"])
+        datagex3.push(obj.data[i]["userDau"])
+        datagex4.push(obj.data[i]["requestNumber"])
+
+      }
+
+    console.log(list,datagex) 
+  return {
+    labels: list,
+    datasets: [
+      {
+        label: "累计下载量",
+        fill: true,
+        borderColor: "#1f8ef1",
+        borderWidth: 2,
+        borderDash: [],
+        borderDashOffset: 0.0,
+        pointBackgroundColor: "#1f8ef1",
+        pointBorderColor: "rgba(255,255,255,0)",
+        pointHoverBackgroundColor: "#1f8ef1",
+        pointBorderWidth: 20,
+        pointHoverRadius: 4,
+        pointHoverBorderWidth: 15,
+        pointRadius: 4,
+        data: datagex
+      },
+      {
+        label: "日新增安装量",
+        fill: true,
+        borderColor: "#d048b6",
+        borderWidth: 2,
+        borderDash: [],
+        borderDashOffset: 0.0,
+        pointBackgroundColor: "#d048b6",
+        pointBorderColor: "rgba(255,255,255,0)",
+        pointHoverBackgroundColor: "#d048b6",
+        pointBorderWidth: 20,
+        pointHoverRadius: 4,
+        pointHoverBorderWidth: 15,
+        pointRadius: 4,
+        data: datagex2
+      },
+      {
+        label: "日活跃度",
+        fill: true,
+        borderColor: "#00FF7F",
+        borderWidth: 2,
+        borderDash: [],
+        borderDashOffset: 0.0,
+        pointBackgroundColor: "#00FF7F",
+        pointBorderColor: "rgba(255,255,255,0)",
+        pointHoverBackgroundColor: "#00FF7F",
+        pointBorderWidth: 20,
+        pointHoverRadius: 4,
+        pointHoverBorderWidth: 15,
+        pointRadius: 4,
+        data: datagex3
+      },
+      {
+        label: "日调用",
+        fill: true,
+        borderColor: "#9932CC",
+        borderWidth: 2,
+        borderDash: [],
+        borderDashOffset: 0.0,
+        pointBackgroundColor: "#9932CC",
+        pointBorderColor: "rgba(255,255,255,0)",
+        pointHoverBackgroundColor: "#9932CC",
+        pointBorderWidth: 20,
+        pointHoverRadius: 4,
+        pointHoverBorderWidth: 15,
+        pointRadius: 4,
+        data: datagex4
+      }
+    ]
    }
+  }
   useEffect(() => {
-      datasum("2022-11-01","2022-11-10")
+      dataSum(startDate,endDate)
   }, []);
-  let dataset={}
-  dataset={datagex:datagex}
   return (
     <>
       <div className="content">
@@ -330,8 +476,8 @@ datagex2=[
 
                 <Row>
                   <Col className="text-left" sm="6">
-                    <h5 className="card-category">CodeGeeX下载总量</h5>
-                    <CardTitle tag="h2">4648</CardTitle>
+                    <h5 className="card-category">CodeGeeX</h5>
+                    <CardTitle tag="h2">总面板</CardTitle>
                     </Col>
                     <Col className="text-right" sm="6">
                     <Form className="text-right" inline>
@@ -340,7 +486,7 @@ datagex2=[
                         <Input
                           type="date"
                           name="start date"
-                          placeholder="2022/10/01"
+                          onChange={(e) => { setStartDate(e.target.value) }}
                         />
                       </FormGroup>
                       <FormGroup>
@@ -348,10 +494,9 @@ datagex2=[
                         <Input
                           type="date"
                           name="end date"
-                          placeholder="2022/10/02"
+                          onChange={(e) => { setEndDate(e.target.value) }}
                         />
                       </FormGroup>
-                    <Button >查询</Button>
                   </Form>
                   </Col>
                 </Row>
@@ -359,7 +504,7 @@ datagex2=[
               <CardBody>
                 <div className="chart-area">
                   <Line
-                    data={chartExample1[bigChartData]}
+                    data={dataSum(startDate, endDate)}
                     options={chartExample1.options}
                   />
                 </div>
@@ -369,6 +514,7 @@ datagex2=[
         </Row>
         <Row>
 
+
         </Row>
         <Row>
           <Col xs="12">
@@ -376,8 +522,8 @@ datagex2=[
               <CardHeader>
                 <Row>
                   <Col className="text-left" sm="6">
-                    <h5 className="card-category">CodeGeeX调用总量</h5>
-                    <CardTitle tag="h2">2056521</CardTitle>
+                    <h5 className="card-category">CodeGeeX</h5>
+                    <CardTitle tag="h2">累计下载</CardTitle>
                   </Col>
                 </Row>
               </CardHeader>
@@ -397,17 +543,53 @@ datagex2=[
         <Col lg="4">
             <Card className="card-chart">
               <CardHeader>
-                <h5 className="card-category">Daily Sales</h5>
+                <h5 className="card-category">CodeGeeX</h5>
                 <CardTitle tag="h3">
                   <i className="tim-icons icon-delivery-fast text-primary" />{" "}
-                  3,500€
+                  日新增
                 </CardTitle>
               </CardHeader>
               <CardBody>
                 <div className="chart-area">
-                  <Bar
-                    data={chartExample3.data}
-                    options={chartExample3.options}
+                  <Line
+                    data={chartExample1["data3"]}
+                    options={chartExample1.options}
+                  />
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col lg="4">
+            <Card className="card-chart">
+              <CardHeader>
+                <h5 className="card-category">CodeGeeX</h5>
+                <CardTitle tag="h3">
+                  <i className="tim-icons icon-send text-success" /> 日活
+                </CardTitle>
+              </CardHeader>
+              <CardBody>
+                <div className="chart-area">
+                  <Line
+                    data={chartExample1["data4"]}
+                    options={chartExample4.options}
+                  />
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col lg="4">
+            <Card className="card-chart">
+              <CardHeader>
+                <h5 className="card-category">CodeGeeX</h5>
+                <CardTitle tag="h3">
+                  <i className="tim-icons icon-send text-success" /> 日调用
+                </CardTitle>
+              </CardHeader>
+              <CardBody>
+                <div className="chart-area">
+                  <Line
+                    data={chartExample1["data5"]}
+                    options={chartExample1.options}
                   />
                 </div>
               </CardBody>
