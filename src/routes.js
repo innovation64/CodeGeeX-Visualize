@@ -16,6 +16,7 @@
 
 */
 import Dashboard from "views/Dashboard.js";
+import Abnormal from "views/Abnormal.js";
 import Map from "views/Map.js";
 
 var routes = [
@@ -28,6 +29,14 @@ var routes = [
     layout: "/admin"
   },
   {
+    path: "/Abnormal",
+    name: "Abnormal",
+    rtlName: "خرائط",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Abnormal,
+    layout: "/admin"
+  },
+  {
     path: "/map",
     name: "Map",
     rtlName: "خرائط",
@@ -35,5 +44,6 @@ var routes = [
     component: Map,
     layout: "/admin"
   }
+
 ];
 export default routes;
