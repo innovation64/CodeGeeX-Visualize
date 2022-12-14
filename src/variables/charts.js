@@ -75,7 +75,7 @@ for (var i=28;i<32;i++)
 { 
   list.push('10月'+i+'号')
 }
-for (var i=1;i<31;i++)
+for (let i=1;i<31;i++)
 { 
   list.push('11月'+i+'号')
 }

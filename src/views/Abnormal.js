@@ -38,7 +38,7 @@ import {
 import {
   chartExample4
 } from "variables/charts.js";
-import { data } from 'jquery';
+// import { data } from 'jquery';
 function Abnormal(props) {
   const [startDate, setStartDate] = useState("2022-12-01");
   const [endDate, setEndDate] = useState("2022-12-5");
@@ -465,6 +465,7 @@ function Abnormal(props) {
   }
   useEffect(() => {
       dataSum(startDate,endDate)
+      // eslint-disable-next-line
   }, []);
   return (
     <>
