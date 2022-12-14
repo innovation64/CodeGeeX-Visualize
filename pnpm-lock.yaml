@@ -11,6 +11,7 @@ specifiers:
   gulp: 4.0.2
   gulp-append-prepend: 1.0.9
   jquery: 3.6.0
+  language-tags: 1.0.6
   perfect-scrollbar: 1.5.5
   prop-types: 15.8.1
   react: '>=16.8.0'
@@ -51,6 +52,7 @@ devDependencies:
   autoprefixer: 10.4.5_postcss@8.4.20
   gulp: 4.0.2
   gulp-append-prepend: 1.0.9
+  language-tags: 1.0.6
 
 packages:
 
@@ -7418,14 +7420,12 @@ packages:
 
   /language-subtag-registry/0.3.22:
     resolution: {integrity: sha512-tN0MCzyWnoz/4nHS6uxdlFWoUZT7ABptwKPQ52Ea7URk6vll88bWBVhodtnlfEuCcKWNGoc+uGbw1cwa9IKh/w==}
-    dev: false
 
   /language-tags/1.0.6:
     resolution: {integrity: sha512-qJhlO9cGXi6hBGKoxEG/sKZDAHD5Hnu9Hs4WbOY3pCWXDhw0N8x1NenNzm2EnNLkLkk7J2SdxAkDSbb6ftT+UQ==, tarball: language-tags/-/language-tags-1.0.5.tgz}
     deprecated: '[WARNING] Use 1.0.5 instead of 1.0.6, reason: not compatible with node 10.'
     dependencies:
       language-subtag-registry: 0.3.22
-    dev: false
 
   /last-run/1.1.1:
     resolution: {integrity: sha512-U/VxvpX4N/rFvPzr3qG5EtLKEnNI0emvIQB3/ecEwv+8GHaUKbIB8vxv1Oai5FAF0d0r7LXHhLLe5K/yChm5GQ==}
