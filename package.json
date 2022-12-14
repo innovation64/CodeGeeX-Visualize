@@ -51,9 +51,6 @@
   "devDependencies": {
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.9",
-    "language-tags": "1.0.5"
-  },
-  "overrides": {
     "autoprefixer": "10.4.5"
   }
 }
