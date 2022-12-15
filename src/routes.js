@@ -17,7 +17,6 @@
 */
 import Dashboard from "views/Dashboard.js";
 import Abnormal from "views/Abnormal.js";
-import Map from "views/Map.js";
 
 var routes = [
   {
