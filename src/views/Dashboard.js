@@ -16,6 +16,7 @@
 
 */
 import React, { useState, useEffect} from 'react';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 // nodejs library that concatenates classes
 // react plugin used to create charts
 import { Line } from "react-chartjs-2";
@@ -38,7 +39,7 @@ import {
 import {
   chartExample4
 } from "variables/charts.js";
-// import { data } from 'jquery';
+import { data } from 'jquery';
 function Dashboard(props) {
   const [startDate, setStartDate] = useState("2022-12-01");
   const [endDate, setEndDate] = useState("2022-12-5");
@@ -48,9 +49,15 @@ function Dashboard(props) {
   let datagex=[]
   let datagex4=[]
   let chart1_2_options = {
+    Plugins:{
+      datalabels: {
+        display: true,
+        color: 'white'
+     }
+    },
     maintainAspectRatio: false,
     legend: {
-      display: false
+      display: true
     },
     tooltips: {
       backgroundColor: "#f5f5f5",
@@ -367,7 +374,7 @@ function Dashboard(props) {
     datagex4=[]
 
     let request = new XMLHttpRequest();
-    request.open('GET', "http://10.50.74.216:32621/tracking/visualData/selectDaily?startTime="+a+"&endTime="+b, false);  // 同步请求
+    request.open('GET', "https://maas.aminer.cn/tracking/visualData/selectDaily?startTime="+a+"&endTime="+b, false);  // 同步请求
     request.send(null);
 
     let obj={}
@@ -465,7 +472,6 @@ function Dashboard(props) {
   }
   useEffect(() => {
       dataSum(startDate,endDate)
-      // eslint-disable-next-line
   }, []);
   return (
     <>
@@ -483,7 +489,7 @@ function Dashboard(props) {
                     <Col className="text-right" sm="6">
                     <Form className="text-right" inline>
                       <FormGroup>
-                        <Label for="exampleEmail">start date</Label>
+                        <Label >start date</Label>
                         <Input
                           type="date"
                           name="start date"
@@ -491,7 +497,7 @@ function Dashboard(props) {
                         />
                       </FormGroup>
                       <FormGroup>
-                        <Label for="examplePassword">end datey</Label>
+                        <Label >end datey</Label>
                         <Input
                           type="date"
                           name="end date"
@@ -506,7 +512,7 @@ function Dashboard(props) {
                 <div className="chart-area">
                   <Line
                     data={dataSum(startDate, endDate)}
-                    options={chartExample1.options}
+                    plugins={[ChartDataLabels]} options={chartExample1.options}
                   />
                 </div>
               </CardBody>
@@ -533,6 +539,7 @@ function Dashboard(props) {
                   <Line
               
                     data={chartExample1["data2"]}
+                    plugins={[ChartDataLabels]} 
                     options={chartExample1.options}
                   />
                 </div>
@@ -554,6 +561,7 @@ function Dashboard(props) {
                 <div className="chart-area">
                   <Line
                     data={chartExample1["data3"]}
+                    plugins={[ChartDataLabels]} 
                     options={chartExample1.options}
                   />
                 </div>
@@ -572,6 +580,7 @@ function Dashboard(props) {
                 <div className="chart-area">
                   <Line
                     data={chartExample1["data4"]}
+                    plugins={[ChartDataLabels]} 
                     options={chartExample4.options}
                   />
                 </div>
@@ -590,6 +599,7 @@ function Dashboard(props) {
                 <div className="chart-area">
                   <Line
                     data={chartExample1["data5"]}
+                    plugins={[ChartDataLabels]} 
                     options={chartExample1.options}
                   />
                 </div>

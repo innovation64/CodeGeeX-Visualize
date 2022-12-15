@@ -25,7 +25,7 @@ import {
 } from "reactstrap";
 
 function AdminNavbar(props) {
-  const [collapseOpen] = React.useState(false);
+  const [collapseOpen, setcollapseOpen] = React.useState(false);
   const [color, setcolor] = React.useState("navbar-transparent");
   React.useEffect(() => {
     window.addEventListener("resize", updateColor);

@@ -28,7 +28,7 @@ function FixedPlugin(props) {
     setdropDownIsOpen(!dropDownIsOpen);
   };
   return (
-    <div >
+    <div  className="fixed-plugin">
       {/* className="fixed-plugin" */}
       <Dropdown isOpen={dropDownIsOpen} toggle={handleClick}>
         <DropdownToggle tag="div">
@@ -85,7 +85,6 @@ function FixedPlugin(props) {
               )}
             </ThemeContext.Consumer>
           </li>
-          <li className="header-title">Want more components?</li>
         </ul>
       </Dropdown>
     </div>

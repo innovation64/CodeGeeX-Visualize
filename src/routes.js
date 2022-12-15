@@ -35,14 +35,6 @@ var routes = [
     icon: "tim-icons icon-chart-pie-36",
     component: Abnormal,
     layout: "/admin"
-  },
-  {
-    path: "/map",
-    name: "Map",
-    rtlName: "خرائط",
-    icon: "tim-icons icon-pin",
-    component: Map,
-    layout: "/admin"
   }
 
 ];
