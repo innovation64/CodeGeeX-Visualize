@@ -102,7 +102,7 @@ function Dashboard(props) {
 
   useEffect(() => {
  
-    let tests="https://maas.aminer.cn/tracking/visualData/selectDaily?startTime="+startDate+"&endTime="+endDate;
+    let tests=
     axios.get(tests)
     .then(response=>{
       let list=[]
