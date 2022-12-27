@@ -110,7 +110,7 @@ function Abnormal(props) {
     }
   };
    useEffect(() => {
-    let tests="https://maas.aminer.cn/tracking/report/selectPlugReport?startTime="+startDate+"&endTime="+startDate;
+    let tests=
     axios.get(tests)
     .then(
       response=>{
@@ -130,7 +130,7 @@ function Abnormal(props) {
   }, [startDate]);
 
   useEffect(() => {
-    let tests="https://maas.aminer.cn/tracking/report/selectWeekReport?startTime="+endDate+"&endTime="+endDate;
+    let tests=
     axios.get(tests)
     .then(
       response=>{
@@ -148,7 +148,7 @@ function Abnormal(props) {
   }, [endDate]);
 
 useEffect(() => {
-  let texts="https://maas.aminer.cn/tracking/report/userAnalysis?startTime="+abtime+"&endTime="+abtime;
+  let texts=
   axios.get(texts)
   .then(
     response=>{
@@ -214,7 +214,7 @@ useEffect(()=>{
   let count=[];
   let list2=[];
   let count1=[];
-  let texts="https://maas.aminer.cn/tracking/report/addrTol?startTime="+abtime+"&endTime="+abtime;
+  let texts=
   axios.get(texts)
   .then(
     response=>{
