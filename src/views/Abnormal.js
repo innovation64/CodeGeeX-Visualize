@@ -17,10 +17,8 @@
 */
 import React ,{ useState, useEffect} from "react";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-// nodejs library that concatenates classes
-import classNames from "classnames";
-// react plugin used to create charts
-import { Line, Bar } from "react-chartjs-2";
+import { Pie,Line} from "react-chartjs-2";
+import axios from 'axios';
 
 // reactstrap components
 import {
@@ -36,15 +34,11 @@ import {
   Col,
 } from "reactstrap";
 
-// core components
-import {
-  chartExample1,
-} from "variables/charts.js";
 
 function Abnormal(props) {
    const [startDate, setStartDate] = useState("2022-12-01");
    const [endDate, setEndDate] = useState("2022-12-9");
-   const [abtime, setabtime] = useState("2022-12-11");
+   const [abtime, setabtime] = useState("2022-12-21");
    const [downloadq,setdownloadq]=useState("30");
    const [daliydownloadq,setdaliydownloadq]=useState("30");
    const [vscodedownload,setvscodedownload]=useState("30");
@@ -58,9 +52,13 @@ function Abnormal(props) {
    const [weeknew,setweeknew]=useState("10");
    const [weekcall,setweekcall]=useState("10");
    const [weekuse,setweekuse]=useState("10");
-  let list=[];
-  let datagex4=[];
-  let ratio=[];
+   const [chart1,setChart1]=useState({});
+   const [chart2,setChart2]=useState({});
+   const [chart3,setChart3]=useState({});
+   const [chart4,setChart4]=useState({});
+   const [list,setList]=useState([]);
+
+
 
    let chart1_2_options = {
     maintainAspectRatio: false,
@@ -111,25 +109,68 @@ function Abnormal(props) {
       ]
     }
   };
-   let chartExample1 = {
-    data3: (canvas) => {
-      let ctx = canvas.getContext("2d");
+   useEffect(() => {
+    let tests="https://maas.aminer.cn/tracking/report/selectPlugReport?startTime="+startDate+"&endTime="+startDate;
+    axios.get(tests)
+    .then(
+      response=>{
+        setdownloadq(response.data.data["installsNumber"]);
+        setdaliydownloadq(response.data.data["addInstallsNumber"]);
+        setvscodedownload(response.data.data["vscodeInstallsNumber"]);
+        setvscodenew(response.data.data["addVscodeInstallsNumber"]);
+        setjet(response.data.data["ideaInstallsNumber"]);
+        setjet2(response.data.data["addIdeaInstallsNumber"]);
+        setdaycall(response.data.data["requestNumber"]);
+        setdayuse(response.data.data["userDau"]);
+      }
+    )
+    .catch(error=>{
+      console.log(error);
+    });
+  }, [startDate]);
+
+  useEffect(() => {
+    let tests="https://maas.aminer.cn/tracking/report/selectWeekReport?startTime="+endDate+"&endTime="+endDate;
+    axios.get(tests)
+    .then(
+      response=>{
+        setweekdownload(response.data.data["installsNumber"])
+        setweekcu(response.data.data["totalRequestNumber"])
+        setweeknew(response.data.data["weekInstallsNumber"])
+        setweekcall(response.data.data["weekRequestNumber"])
+        setweekuse(response.data.data["weekUserDau"])
   
-      let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+      }
+    )
+  .catch(error=>{
+      console.log(error);
+    });
+  }, [endDate]);
+
+useEffect(() => {
+  let texts="https://maas.aminer.cn/tracking/report/userAnalysis?startTime="+abtime+"&endTime="+abtime;
+  axios.get(texts)
+  .then(
+    response=>{
+      let list1=[]
+      let datagex4=[];
+      let ratio=[];
+      for(var i=0;i<10;i++)
+      {
   
-      gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
-      gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
-      gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
+        list1.push(response.data.data[i]["vscodeMachineId"])
+        ratio.push(response.data.data[i]["adoptCount"]/response.data.data[i]["total"])
+        datagex4.push(response.data.data[i]["total"])
   
-      return {
+      }
+      setList(list1)
+      setChart4({
         labels: [1,2,3,4,5,6,7,8,9,10],
         datasets: [
           {
             label: "用户采纳率",
             fill: true,
             type: 'bar',
-            backgroundColor: gradientStroke,
-            hoverBackgroundColor: gradientStroke,
             borderColor: "#d048b6",
             borderWidth: 2,
             borderDash: [],
@@ -137,24 +178,14 @@ function Abnormal(props) {
             data: ratio
           }
         ]
-      };
-    },
-    data5: (canvas) => {
-      let ctx = canvas.getContext("2d");
-  
-      let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-  
-      gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
-      gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
-      gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
-  
-      return {
-        labels: list,
+      })
+      setChart3({
+
+        labels: [1,2,3,4,5,6,7,8,9,10],
         datasets: [
           {
-            label: "日调用",
+            label: "调用排行",
             fill: true,
-            backgroundColor: gradientStroke,
             borderColor: "#1f8ef1",
             borderWidth: 2,
             borderDash: [],
@@ -167,129 +198,84 @@ function Abnormal(props) {
             pointHoverBorderWidth: 15,
             pointRadius: 4,
             data: datagex4
-          },
+          }]
+      })
+    }
+
+  )
+  .catch(error=>{
+    console.log(error);
+  });
+}, [abtime]);
+
+
+useEffect(()=>{
+  let list1=[];
+  let count=[];
+  let list2=[];
+  let count1=[];
+  let texts="https://maas.aminer.cn/tracking/report/addrTol?startTime="+abtime+"&endTime="+abtime;
+  axios.get(texts)
+  .then(
+    response=>{
+
+  for(var i=0;i<response.data.data.length;i++)
+    {
+
+      list1.push(response.data.data[i]["country"])
+      count.push(response.data.data[i]["total"])
+      if (response.data.data[i]["total"]>35)
+      {
+        list2.push(response.data.data[i]["country"])
+        count1.push(response.data.data[i]["total"])
+      }
+
+    }
+  
+console.log(list1,list2,count,count1)
+ setChart1({
+
+    labels: list2,
+        datasets: [
           {
-            label: "日调用",
+            label: "国家分布",
             fill: true,
-            type: 'bar',
-            backgroundColor: gradientStroke,
-            hoverBackgroundColor: gradientStroke,
-            borderColor: "#d048b6",
+            type: 'pie',
+            borderColor: "#0068b7",
             borderWidth: 2,
             borderDash: [],
             borderDashOffset: 0.0,
-            data: datagex4
-          }
-        ]
-      };
-    },
-    options: chart1_2_options
-  };
+            data: count1
+         }
+      ]
+  })
+    setChart2({
 
-
-   const getData1 = (startDate) => {
-    let request = new XMLHttpRequest();
-    request.open('GET', "https://maas.aminer.cn/tracking/report/selectPlugReport?startTime="+startDate+"&endTime="+startDate, false);  // 同步请求
-    request.send(null);
-
-    let obj={}
-    if (request.status === 200) {
-       obj = JSON.parse(request.responseText);
-      console.log(obj) 
-      // console.log(request.responseText);
+          labels: list1,
+          datasets: [
+            {
+              label: "国家分布",
+              fill: true,
+              borderColor: "#1f8ef1",
+              borderWidth: 2,
+              borderDash: [],
+              borderDashOffset: 0.0,
+              pointBackgroundColor: "#1f8ef1",
+              pointBorderColor: "rgba(255,255,255,0)",
+              pointHoverBackgroundColor: "#1f8ef1",
+              pointBorderWidth: 20,
+              pointHoverRadius: 4,
+              pointHoverBorderWidth: 15,
+              pointRadius: 4,
+              data: count
+            }]
+        })
     }
-
-      console.log(Object.keys(obj.data).length) 
-
-    setdownloadq(obj.data["installsNumber"]);
-    setdaliydownloadq(obj.data["addInstallsNumber"]);
-    setvscodedownload(obj.data["vscodeInstallsNumber"]);
-    setvscodenew(obj.data["addVscodeInstallsNumber"]);
-    setjet(obj.data["ideaInstallsNumber"]);
-    setjet2(obj.data["addIdeaInstallsNumber"]);
-    setdaycall(obj.data["requestNumber"]);
-    setdayuse(obj.data["userDau"]);
-  };
-   useEffect(() => {
-    getData1(startDate)
-  }, [startDate]);
-
-  const getData2 = (endDate) => {
-    let request = new XMLHttpRequest();
-    request.open('GET', "https://maas.aminer.cn/tracking/report/selectWeekReport?startTime="+endDate+"&endTime="+endDate, false);  // 同步请求
-    request.send(null);
-
-    let obj={}
-    if (request.status === 200) {
-       obj = JSON.parse(request.responseText);
-      console.log(obj) 
-      // console.log(request.responseText);
-    }
-
-      console.log(Object.keys(obj.data).length) 
-      setweekdownload(obj.data["installsNumber"])
-      setweekcu(obj.data["totalRequestNumber"])
-      setweeknew(obj.data["weekInstallsNumber"])
-      setweekcall(obj.data["weekRequestNumber"])
-      setweekuse(obj.data["weekUserDau"])
-
-
-  };
-  useEffect(() => {
-    getData2(endDate)
-  }, [endDate]);
-
-  const getData3 = (abtime) => {
-  let request = new XMLHttpRequest();
-  let texts="https://maas.aminer.cn/tracking/report/userAnalysis?startTime="+abtime+"&endTime="+abtime;
-  console.log(texts)
-  request.open('GET', texts, false);  // 同步请求
-  request.send(null);
-
-  let obj={}
-  if (request.status === 200) {
-      obj = JSON.parse(request.responseText);
-    console.log(obj) 
-    // console.log(request.responseText);
-  }
-
-    console.log(Object.keys(obj.data).length) 
-
-    for(var i=0;i<10;i++)
-    {
-
-      list.push(obj.data[i]["vscodeMachineId"])
-      ratio.push(obj.data[i]["adoptCount"]/obj.data[i]["total"])
-      datagex4.push(obj.data[i]["total"])
-
-    }
-  return{
-
-    labels: [1,2,3,4,5,6,7,8,9,10],
-    datasets: [
-      {
-        label: "调用排行",
-        fill: true,
-        borderColor: "#1f8ef1",
-        borderWidth: 2,
-        borderDash: [],
-        borderDashOffset: 0.0,
-        pointBackgroundColor: "#1f8ef1",
-        pointBorderColor: "rgba(255,255,255,0)",
-        pointHoverBackgroundColor: "#1f8ef1",
-        pointBorderWidth: 20,
-        pointHoverRadius: 4,
-        pointHoverBorderWidth: 15,
-        pointRadius: 4,
-        data: datagex4
-      }]
-  }
-
-
-};
-useEffect(() => {
-  getData3(abtime)
-}, [abtime]);
+  )
+  .catch(error=>{
+    console.log(error);
+  });
+},[abtime])
   return (
     <>
       <div className="content">
@@ -385,7 +371,49 @@ useEffect(() => {
           </Col>
         </Row>
         <Row>
-        <Col lg="4">
+        <Col lg="8">
+          <Card className="card-chart">
+              <CardHeader>
+                <h5 className="card-category">CodeGeeX</h5>
+                <CardTitle tag="h3">
+                  <i className="tim-icons icon-delivery-fast text-primary" />{" "}
+                  国家用户分布
+                </CardTitle>
+              </CardHeader>
+              <CardBody>
+                <div className="chart-area">
+                  <Line
+                    data={chart2}
+                    plugins={[ChartDataLabels]} 
+                    options={chart1_2_options}
+                  />
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col lg="4">
+          <Card className="card-chart">
+              <CardHeader>
+                <h5 className="card-category">CodeGeeX</h5>
+                <CardTitle tag="h3">
+                  <i className="tim-icons icon-delivery-fast text-primary" />{" "}
+                  国家用户分布
+                </CardTitle>
+              </CardHeader>
+              <CardBody>
+                <div className="chart-area">
+                  <Pie
+                    data={chart1}
+                    plugins={[ChartDataLabels]} 
+                    options={chart1_2_options}
+                  />
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+        <Row  >
+        <Col lg="4" >
 
             <Card className="card-chart">
               <CardHeader>
@@ -398,9 +426,9 @@ useEffect(() => {
               <CardBody>
                 <div className="chart-area">
                   <Line
-                    data={chartExample1["data3"]}
+                    data={chart4}
                     plugins={[ChartDataLabels]} 
-                    options={chartExample1.options}
+                    options={chart1_2_options}
                   />
                 </div>
               </CardBody>
@@ -415,23 +443,16 @@ useEffect(() => {
               <CardBody>
                 <div className="chart-area">
                   <Line
-                    data={getData3(abtime)}
+                    data={chart3}
                     plugins={[ChartDataLabels]} 
-                    options={chartExample1.options}
+                    options={chart1_2_options}
                   />
                 </div>
               </CardBody>
             </Card>
           </Col>
           <Col lg="4" md="12">
-          <FormGroup >
-            <Label >查询日期</Label>
-            <Input
-                  type="date"
-                  name="end date"
-                  onChange={(e) => { setabtime(e.target.value) }}
-               />
-            </FormGroup>
+          
             <Card>
               <CardHeader>
                 <CardTitle tag="h4">异常排除数据</CardTitle>
@@ -445,7 +466,7 @@ useEffect(() => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr >
                       <td >1</td>
                       <td>{list[0]}</td>
                     </tr>
@@ -490,6 +511,22 @@ useEffect(() => {
               </CardBody>
             </Card>
           </Col>
+          <Col lg="4">
+          <FormGroup >
+            <Label >查询日期</Label>
+            <Input
+                  type="date"
+                  name="end date"
+                  defaultValue={2022-12-12}
+                  onChange={(e) => { setabtime(e.target.value) }}
+               />
+            </FormGroup>
+            <h1>注意事项</h1>
+            <h3>异常数据查询日期仅仅支持12月11号以后的查询，之前没有数据库汇总为空</h3>
+            <h3>本查询页面不能查询当天的异常数据，因为所有数据都是次日从数据库汇总</h3>
+
+          </Col>
+
         </Row>
       </div>
     </>

@@ -17,6 +17,7 @@
 */
 import React, { useState, useEffect} from 'react';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import axios from 'axios';
 // nodejs library that concatenates classes
 // react plugin used to create charts
 import { Line } from "react-chartjs-2";
@@ -34,20 +35,15 @@ import {
   Row,
   Col,
 } from "reactstrap";
-
-// core components
-import {
-  chartExample4
-} from "variables/charts.js";
-import { data } from 'jquery';
 function Dashboard(props) {
   const [startDate, setStartDate] = useState("2022-12-01");
   const [endDate, setEndDate] = useState("2022-12-5");
-  let list=[]
-  let datagex2=[]
-  let datagex3=[]
-  let datagex=[]
-  let datagex4=[]
+  const [chart1,setChart1]=useState({});
+  const [chart2,setChart2]=useState({});
+  const [chart3,setChart3]=useState({});
+  const [chart4,setChart4]=useState({});
+  const [chart5,setChart5]=useState({});
+
   let chart1_2_options = {
     Plugins:{
       datalabels: {
@@ -104,375 +100,236 @@ function Dashboard(props) {
     }
   };
 
-  let chartExample1 = {
-    data1: (canvas) => {
-      let ctx = canvas.getContext("2d");
-  
-      let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-  
-      gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
-      gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
-      gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
-  
-      return  {
-        labels: list,
-        datasets: [
-          {
-            label: "累计下载量",
-            fill: true,
-            backgroundColor: gradientStroke,
-            borderColor: "#1f8ef1",
-            borderWidth: 2,
-            borderDash: [],
-            borderDashOffset: 0.0,
-            pointBackgroundColor: "#1f8ef1",
-            pointBorderColor: "rgba(255,255,255,0)",
-            pointHoverBackgroundColor: "#1f8ef1",
-            pointBorderWidth: 20,
-            pointHoverRadius: 4,
-            pointHoverBorderWidth: 15,
-            pointRadius: 4,
-            data: datagex
-          },
-          {
-            label: "日新增安装量",
-            fill: true,
-            backgroundColor: gradientStroke,
-            borderColor: "#1f8ef1",
-            borderWidth: 2,
-            borderDash: [],
-            borderDashOffset: 0.0,
-            pointBackgroundColor: "#1f8ef1",
-            pointBorderColor: "rgba(255,255,255,0)",
-            pointHoverBackgroundColor: "#1f8ef1",
-            pointBorderWidth: 20,
-            pointHoverRadius: 4,
-            pointHoverBorderWidth: 15,
-            pointRadius: 4,
-            data: datagex2
-          },
-          {
-            label: "日活跃度",
-            fill: true,
-            backgroundColor: gradientStroke,
-            borderColor: "#1f8ef1",
-            borderWidth: 2,
-            borderDash: [],
-            borderDashOffset: 0.0,
-            pointBackgroundColor: "#1f8ef1",
-            pointBorderColor: "rgba(255,255,255,0)",
-            pointHoverBackgroundColor: "#1f8ef1",
-            pointBorderWidth: 20,
-            pointHoverRadius: 4,
-            pointHoverBorderWidth: 15,
-            pointRadius: 4,
-            data: datagex3
-          },
-          {
-            label: "日调用",
-            fill: true,
-            backgroundColor: gradientStroke,
-            borderColor: "#1f8ef1",
-            borderWidth: 2,
-            borderDash: [],
-            borderDashOffset: 0.0,
-            pointBackgroundColor: "#1f8ef1",
-            pointBorderColor: "rgba(255,255,255,0)",
-            pointHoverBackgroundColor: "#1f8ef1",
-            pointBorderWidth: 20,
-            pointHoverRadius: 4,
-            pointHoverBorderWidth: 15,
-            pointRadius: 4,
-            data: datagex4
-          }
-        ]
-      };
-    },
-    data2: (canvas) => {
-      let ctx = canvas.getContext("2d");
-  
-      let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-  
-      gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
-      gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
-      gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
-  
-      return {
-        labels: list,
-        datasets: [
-          {
-            label: "累计下载量",
-            fill: true,
-            backgroundColor: gradientStroke,
-            borderColor: "#1f8ef1",
-            borderWidth: 2,
-            borderDash: [],
-            borderDashOffset: 0.0,
-            pointBackgroundColor: "#1f8ef1",
-            pointBorderColor: "rgba(255,255,255,0)",
-            pointHoverBackgroundColor: "#1f8ef1",
-            pointBorderWidth: 20,
-            pointHoverRadius: 4,
-            pointHoverBorderWidth: 15,
-            pointRadius: 4,
-            data: datagex
-          },
-          {
-            label: "累计下载量",
-            fill: true,
-            type: 'bar',
-            backgroundColor: gradientStroke,
-            hoverBackgroundColor: gradientStroke,
-            borderColor: "#d048b6",
-            borderWidth: 2,
-            borderDash: [],
-            borderDashOffset: 0.0,
-            data: datagex
-          }
-        ]
-      };
-    },
-    data3: (canvas) => {
-      let ctx = canvas.getContext("2d");
-  
-      let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-  
-      gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
-      gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
-      gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
-  
-      return {
-        labels: list,
-        datasets: [
-          {
-            label: "日新增安装量",
-            fill: true,
-            backgroundColor: gradientStroke,
-            borderColor: "#1f8ef1",
-            borderWidth: 2,
-            borderDash: [],
-            borderDashOffset: 0.0,
-            pointBackgroundColor: "#1f8ef1",
-            pointBorderColor: "rgba(255,255,255,0)",
-            pointHoverBackgroundColor: "#1f8ef1",
-            pointBorderWidth: 20,
-            pointHoverRadius: 4,
-            pointHoverBorderWidth: 15,
-            pointRadius: 4,
-            data: datagex2
-          },
-          {
-            label: "日新增安装量",
-            fill: true,
-            type: 'bar',
-            backgroundColor: gradientStroke,
-            hoverBackgroundColor: gradientStroke,
-            borderColor: "#d048b6",
-            borderWidth: 2,
-            borderDash: [],
-            borderDashOffset: 0.0,
-            data: datagex2
-          }
-        ]
-      };
-    },
-    data4: (canvas) => {
-      let ctx = canvas.getContext("2d");
-  
-      let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-  
-      gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
-      gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
-      gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
-  
-      return {
-        labels: list,
-        datasets: [
-          {
-            label: "日活跃度",
-            fill: true,
-            backgroundColor: gradientStroke,
-            borderColor: "#1f8ef1",
-            borderWidth: 2,
-            borderDash: [],
-            borderDashOffset: 0.0,
-            pointBackgroundColor: "#1f8ef1",
-            pointBorderColor: "rgba(255,255,255,0)",
-            pointHoverBackgroundColor: "#1f8ef1",
-            pointBorderWidth: 20,
-            pointHoverRadius: 4,
-            pointHoverBorderWidth: 15,
-            pointRadius: 4,
-            data: datagex3
-          },
-          {
-            label: "日活跃度",
-            fill: true,
-            type: 'bar',
-            backgroundColor: gradientStroke,
-            hoverBackgroundColor: gradientStroke,
-            borderColor: "#d048b6",
-            borderWidth: 2,
-            borderDash: [],
-            borderDashOffset: 0.0,
-            data: datagex3
-          }
-        ]
-      };
-    },
-    data5: (canvas) => {
-      let ctx = canvas.getContext("2d");
-  
-      let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-  
-      gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
-      gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
-      gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
-  
-      return {
-        labels: list,
-        datasets: [
-          {
-            label: "日调用",
-            fill: true,
-            backgroundColor: gradientStroke,
-            borderColor: "#1f8ef1",
-            borderWidth: 2,
-            borderDash: [],
-            borderDashOffset: 0.0,
-            pointBackgroundColor: "#1f8ef1",
-            pointBorderColor: "rgba(255,255,255,0)",
-            pointHoverBackgroundColor: "#1f8ef1",
-            pointBorderWidth: 20,
-            pointHoverRadius: 4,
-            pointHoverBorderWidth: 15,
-            pointRadius: 4,
-            data: datagex4
-          },
-          {
-            label: "日调用",
-            fill: true,
-            type: 'bar',
-            backgroundColor: gradientStroke,
-            hoverBackgroundColor: gradientStroke,
-            borderColor: "#d048b6",
-            borderWidth: 2,
-            borderDash: [],
-            borderDashOffset: 0.0,
-            data: datagex4
-          }
-        ]
-      };
-    },
-    options: chart1_2_options
-  };
-  function dataSum(a,b){
-    list=[]
-    datagex=[]
-    datagex2=[]
-    datagex3=[]
-    datagex4=[]
-
-    let request = new XMLHttpRequest();
-    request.open('GET', "https://maas.aminer.cn/tracking/visualData/selectDaily?startTime="+a+"&endTime="+b, false);  // 同步请求
-    request.send(null);
-
-    let obj={}
-    if (request.status === 200) {
-       obj = JSON.parse(request.responseText);
-      console.log(obj) 
-      // console.log(request.responseText);
-    }
-
-      console.log(Object.keys(obj.data).length) 
-
-    // };
-
-    // fetchData();
-         for(var i=0;i<Object.keys(obj.data).length;i++)
-      {
-        list.push(obj.data[i]["dateTime"])
-        datagex.push(obj.data[i]["installsNumber"])
-        datagex2.push(obj.data[i]["addInstallsNumber"])
-        datagex3.push(obj.data[i]["userDau"])
-        datagex4.push(obj.data[i]["requestNumber"])
-
-      }
-
-    console.log(list,datagex) 
-  return {
-    labels: list,
-    datasets: [
-      {
-        label: "累计下载量",
-        fill: true,
-        borderColor: "#1f8ef1",
-        borderWidth: 2,
-        borderDash: [],
-        borderDashOffset: 0.0,
-        pointBackgroundColor: "#1f8ef1",
-        pointBorderColor: "rgba(255,255,255,0)",
-        pointHoverBackgroundColor: "#1f8ef1",
-        pointBorderWidth: 20,
-        pointHoverRadius: 4,
-        pointHoverBorderWidth: 15,
-        pointRadius: 4,
-        data: datagex
-      },
-      {
-        label: "日新增安装量",
-        fill: true,
-        borderColor: "#d048b6",
-        borderWidth: 2,
-        borderDash: [],
-        borderDashOffset: 0.0,
-        pointBackgroundColor: "#d048b6",
-        pointBorderColor: "rgba(255,255,255,0)",
-        pointHoverBackgroundColor: "#d048b6",
-        pointBorderWidth: 20,
-        pointHoverRadius: 4,
-        pointHoverBorderWidth: 15,
-        pointRadius: 4,
-        data: datagex2
-      },
-      {
-        label: "日活跃度",
-        fill: true,
-        borderColor: "#00FF7F",
-        borderWidth: 2,
-        borderDash: [],
-        borderDashOffset: 0.0,
-        pointBackgroundColor: "#00FF7F",
-        pointBorderColor: "rgba(255,255,255,0)",
-        pointHoverBackgroundColor: "#00FF7F",
-        pointBorderWidth: 20,
-        pointHoverRadius: 4,
-        pointHoverBorderWidth: 15,
-        pointRadius: 4,
-        data: datagex3
-      },
-      {
-        label: "日调用",
-        fill: true,
-        borderColor: "#9932CC",
-        borderWidth: 2,
-        borderDash: [],
-        borderDashOffset: 0.0,
-        pointBackgroundColor: "#9932CC",
-        pointBorderColor: "rgba(255,255,255,0)",
-        pointHoverBackgroundColor: "#9932CC",
-        pointBorderWidth: 20,
-        pointHoverRadius: 4,
-        pointHoverBorderWidth: 15,
-        pointRadius: 4,
-        data: datagex4
-      }
-    ]
-   }
-  }
   useEffect(() => {
-      dataSum(startDate,endDate)
-  }, []);
+ 
+    let tests="https://maas.aminer.cn/tracking/visualData/selectDaily?startTime="+startDate+"&endTime="+endDate;
+    axios.get(tests)
+    .then(response=>{
+      let list=[]
+      let datagex=[]
+      let datagex2=[]
+      let datagex3=[]
+      let datagex4=[]
+      for(var i=0;i<response.data.data.length;i++)
+      {
+        list.push(response.data.data[i]["dateTime"])
+        datagex.push(response.data.data[i]["installsNumber"])
+        datagex2.push(response.data.data[i]["addInstallsNumber"])
+        datagex3.push(response.data.data[i]["userDau"])
+        datagex4.push(response.data.data[i]["requestNumber"])
+        setChart1(
+           {
+            labels: list,
+            datasets: [
+              {
+                label: "累计下载量",
+                fill: true,
+                borderColor: "#1f8ef1",
+                borderWidth: 2,
+                borderDash: [],
+                borderDashOffset: 0.0,
+                pointBackgroundColor: "#1f8ef1",
+                pointBorderColor: "rgba(255,255,255,0)",
+                pointHoverBackgroundColor: "#1f8ef1",
+                pointBorderWidth: 20,
+                pointHoverRadius: 4,
+                pointHoverBorderWidth: 15,
+                pointRadius: 4,
+                data: datagex
+              },
+              {
+                label: "日新增安装量",
+                fill: true,
+                borderColor: "#d048b6",
+                borderWidth: 2,
+                borderDash: [],
+                borderDashOffset: 0.0,
+                pointBackgroundColor: "#d048b6",
+                pointBorderColor: "rgba(255,255,255,0)",
+                pointHoverBackgroundColor: "#d048b6",
+                pointBorderWidth: 20,
+                pointHoverRadius: 4,
+                pointHoverBorderWidth: 15,
+                pointRadius: 4,
+                data: datagex2
+              },
+              {
+                label: "日活跃度",
+                fill: true,
+                borderColor: "#00FF7F",
+                borderWidth: 2,
+                borderDash: [],
+                borderDashOffset: 0.0,
+                pointBackgroundColor: "#00FF7F",
+                pointBorderColor: "rgba(255,255,255,0)",
+                pointHoverBackgroundColor: "#00FF7F",
+                pointBorderWidth: 20,
+                pointHoverRadius: 4,
+                pointHoverBorderWidth: 15,
+                pointRadius: 4,
+                data: datagex3
+              },
+              {
+                label: "日调用",
+                fill: true,
+                borderColor: "#9932CC",
+                borderWidth: 2,
+                borderDash: [],
+                borderDashOffset: 0.0,
+                pointBackgroundColor: "#9932CC",
+                pointBorderColor: "rgba(255,255,255,0)",
+                pointHoverBackgroundColor: "#9932CC",
+                pointBorderWidth: 20,
+                pointHoverRadius: 4,
+                pointHoverBorderWidth: 15,
+                pointRadius: 4,
+                data: datagex4
+              }
+            ]
+           }
+        )
+        setChart2(
+           {
+            labels: list,
+            datasets: [
+              {
+                label: "累计下载量",
+                fill: true,
+                borderColor: "#1f8ef1",
+                borderWidth: 2,
+                borderDash: [],
+                borderDashOffset: 0.0,
+                pointBackgroundColor: "#1f8ef1",
+                pointBorderColor: "rgba(255,255,255,0)",
+                pointHoverBackgroundColor: "#1f8ef1",
+                pointBorderWidth: 20,
+                pointHoverRadius: 4,
+                pointHoverBorderWidth: 15,
+                pointRadius: 4,
+                data: datagex
+              },
+              {
+                label: "累计下载量",
+                fill: true,
+                type: 'bar',
+                borderColor: "#d048b6",
+                borderWidth: 2,
+                borderDash: [],
+                borderDashOffset: 0.0,
+                data: datagex
+              }
+            ]
+          }
+
+        )
+        setChart3(
+           {
+            labels: list,
+            datasets: [
+              {
+                label: "日新增安装量",
+                fill: true,
+                borderColor: "#1f8ef1",
+                borderWidth: 2,
+                borderDash: [],
+                borderDashOffset: 0.0,
+                pointBackgroundColor: "#1f8ef1",
+                pointBorderColor: "rgba(255,255,255,0)",
+                pointHoverBackgroundColor: "#1f8ef1",
+                pointBorderWidth: 20,
+                pointHoverRadius: 4,
+                pointHoverBorderWidth: 15,
+                pointRadius: 4,
+                data: datagex2
+              },
+              {
+                label: "日新增安装量",
+                fill: true,
+                type: 'bar',
+                borderColor: "#d048b6",
+                borderWidth: 2,
+                borderDash: [],
+                borderDashOffset: 0.0,
+                data: datagex2
+              }
+            ]
+          }
+
+        )
+        setChart4(
+           {
+            labels: list,
+            datasets: [
+              {
+                label: "日活跃度",
+                fill: true,
+                borderColor: "#1f8ef1",
+                borderWidth: 2,
+                borderDash: [],
+                borderDashOffset: 0.0,
+                pointBackgroundColor: "#1f8ef1",
+                pointBorderColor: "rgba(255,255,255,0)",
+                pointHoverBackgroundColor: "#1f8ef1",
+                pointBorderWidth: 20,
+                pointHoverRadius: 4,
+                pointHoverBorderWidth: 15,
+                pointRadius: 4,
+                data: datagex3
+              },
+              {
+                label: "日活跃度",
+                fill: true,
+                type: 'bar',
+                borderColor: "#d048b6",
+                borderWidth: 2,
+                borderDash: [],
+                borderDashOffset: 0.0,
+                data: datagex3
+              }
+            ]
+          }
+        )
+        setChart5(
+           {
+            labels: list,
+            datasets: [
+              {
+                label: "日调用",
+                fill: true,
+                borderColor: "#1f8ef1",
+                borderWidth: 2,
+                borderDash: [],
+                borderDashOffset: 0.0,
+                pointBackgroundColor: "#1f8ef1",
+                pointBorderColor: "rgba(255,255,255,0)",
+                pointHoverBackgroundColor: "#1f8ef1",
+                pointBorderWidth: 20,
+                pointHoverRadius: 4,
+                pointHoverBorderWidth: 15,
+                pointRadius: 4,
+                data: datagex4
+              },
+              {
+                label: "日调用",
+                fill: true,
+                type: 'bar',
+                borderColor: "#d048b6",
+                borderWidth: 2,
+                borderDash: [],
+                borderDashOffset: 0.0,
+                data: datagex4
+              }
+            ]
+          }
+        )
+
+      }
+
+    })
+    .catch(error=>{
+      console.log(error);
+    });
+  }, [startDate,endDate]);
   return (
     <>
       <div className="content">
@@ -511,8 +368,8 @@ function Dashboard(props) {
               <CardBody>
                 <div className="chart-area">
                   <Line
-                    data={dataSum(startDate, endDate)}
-                    plugins={[ChartDataLabels]} options={chartExample1.options}
+                    data={chart1}
+                    plugins={[ChartDataLabels]} options={chart1_2_options}
                   />
                 </div>
               </CardBody>
@@ -538,9 +395,9 @@ function Dashboard(props) {
                 <div className="chart-area">
                   <Line
               
-                    data={chartExample1["data2"]}
+                    data={chart2}
                     plugins={[ChartDataLabels]} 
-                    options={chartExample1.options}
+                    options={chart1_2_options}
                   />
                 </div>
               </CardBody>
@@ -560,9 +417,9 @@ function Dashboard(props) {
               <CardBody>
                 <div className="chart-area">
                   <Line
-                    data={chartExample1["data3"]}
+                    data={chart3}
                     plugins={[ChartDataLabels]} 
-                    options={chartExample1.options}
+                    options={chart1_2_options}
                   />
                 </div>
               </CardBody>
@@ -579,9 +436,9 @@ function Dashboard(props) {
               <CardBody>
                 <div className="chart-area">
                   <Line
-                    data={chartExample1["data4"]}
+                    data={chart4}
                     plugins={[ChartDataLabels]} 
-                    options={chartExample4.options}
+                    options={chart1_2_options}
                   />
                 </div>
               </CardBody>
@@ -598,9 +455,9 @@ function Dashboard(props) {
               <CardBody>
                 <div className="chart-area">
                   <Line
-                    data={chartExample1["data5"]}
+                    data={chart5}
                     plugins={[ChartDataLabels]} 
-                    options={chartExample1.options}
+                    options={chart1_2_options}
                   />
                 </div>
               </CardBody>

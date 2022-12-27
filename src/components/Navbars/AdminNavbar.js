@@ -22,6 +22,7 @@ import classNames from "classnames";
 // reactstrap components
 import {
   Navbar,
+  NavbarToggler
 } from "reactstrap";
 
 function AdminNavbar(props) {
@@ -47,6 +48,11 @@ function AdminNavbar(props) {
     <>
       <Navbar className={classNames("navbar-absolute", color)} expand="lg">
           <div style={{ color: "white",fontSize:"30px" }} >
+          <NavbarToggler onClick={props.toggleSidebar}>
+                <span className="navbar-toggler-bar bar1" />
+                <span className="navbar-toggler-bar bar2" />
+                <span className="navbar-toggler-bar bar3" />
+              </NavbarToggler>
             天启大模型
           </div>
       </Navbar>

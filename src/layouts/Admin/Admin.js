@@ -80,7 +80,7 @@ function Admin(props) {
   };
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/black-dashboard-react") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -88,7 +88,8 @@ function Admin(props) {
             key={key}
           />
         );
-      } else {
+
+} else {
         return null;
       }
     });
@@ -123,12 +124,9 @@ function Admin(props) {
               />
               <Switch>
                 {getRoutes(routes)}
-                <Redirect from="*" to="/admin/dashboard" />
+                <Redirect from="*" to="/black-dashboard-react/dashboard" />
               </Switch>
-              {
-                // we don't want the Footer to be rendered on map page
-                location.pathname === "/admin/maps" ? null : <Footer fluid />
-              }
+              <Footer fluid />
             </div>
           </div>
           <FixedPlugin bgColor={color} handleBgClick={changeColor} />

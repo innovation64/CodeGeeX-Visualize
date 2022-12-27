@@ -25,7 +25,7 @@ var routes = [
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: Dashboard,
-    layout: "/admin"
+    layout: "/black-dashboard-react"
   },
   {
     path: "/Abnormal",
@@ -33,7 +33,7 @@ var routes = [
     rtlName: "خرائط",
     icon: "tim-icons icon-chart-pie-36",
     component: Abnormal,
-    layout: "/admin"
+    layout: "/black-dashboard-react"
   }
 
 ];
